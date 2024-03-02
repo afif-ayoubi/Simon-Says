@@ -21,15 +21,6 @@ const board = document.querySelector('.board');
 let currentPattern = [];
 let counter = 0;
 
-function generatePattern(level) {
-    const pattern = [];
-    for (let i = 0; i < level; i++) {
-        const randomIndex = Math.floor(Math.random() * colors.length);
-        pattern.push(colors[randomIndex]);
-    }
-    return pattern;
-}
-
 function makeClickable() {
     board.classList.remove('unclickable');
 }
@@ -83,7 +74,6 @@ function playPattern(pattern) {
     const interval = setInterval(() => {
         if (index < pattern.length) {
             const color = pattern[index];
-            makeClickable();
             activateTile(color);
             playSound(color);
             setTimeout(() => deactivateTile(color), 500);
@@ -107,9 +97,8 @@ function handleTileClick(color) {
             level++;
             levelDisplay.textContent = level;
             if (level > highScore) {
-                highScore = level;
-                highScoreDisplay.textContent = highScore;
-                localStorage.setItem('highScore', highScore);
+                highScoreDisplay.textContent = level;
+                localStorage.setItem('highScore', level);
             }
             if (level === 12) { 
                 playGameWinSound(); 

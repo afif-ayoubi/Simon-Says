@@ -1,4 +1,7 @@
 const colors = ['green', 'red', 'blue', 'yellow'];
+const playButton=document.getElementById('play');
+const levelDisplay = document.getElementById('level');
+
 const sounds = {
     green: new Audio('sounds/green.mp3'),
     red: new Audio('sounds/red.mp3'),
@@ -57,3 +60,33 @@ function playWrongSound() {
     sounds.wrong.currentTime = 0;
     sounds.wrong.play();
 }
+function resetGame() {
+    currentPattern = [];
+    counter = 0;
+    const levelDisplay = document.getElementById('level');
+    levelDisplay.textContent = '0';
+    makeUnclickable();
+}
+function playPattern(pattern) {
+    makeUnclickable(); 
+    let index = 0;
+    const interval = setInterval(() => {
+        if (index < pattern.length) {
+            const color = pattern[index];
+            makeClickable();
+                activateTile(color);
+            playSound(color);
+            setTimeout(() => deactivateTile(color), 500);
+            index++;
+        } else {
+            clearInterval(interval);
+            makeClickable();
+        }
+    }, 1000);
+}
+playButton.addEventListener('click', () => {
+    resetGame();
+    levelDisplay.textContent = '1';
+    currentPattern.push(colors[Math.floor(Math.random() * colors.length)]);
+    playPattern(currentPattern);
+});

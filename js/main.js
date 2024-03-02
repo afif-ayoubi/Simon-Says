@@ -43,3 +43,17 @@ function playSound(color) {
     sound.currentTime = 0;
     sound.play();
 }
+function playGameOverSound() {
+    sounds.gameOver.currentTime = 0;
+    sounds.gameOver.play();
+}
+
+function playGameWinSound() {
+    sounds.gameWin.currentTime = 0;
+    sounds.gameWin.play();
+}
+
+function playWrongSound() {
+    sounds.wrong.currentTime = 0;
+    sounds.wrong.play();
+}

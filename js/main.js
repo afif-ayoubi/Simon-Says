@@ -34,3 +34,7 @@ function activateTile(color){
     tile.style.opacity=1;
     tile.classList.remove('inactive');
 }
+function deactivateTile(color) {
+    const tile = document.querySelector(`[data-tile="${color}"]`);
+    tile.style.opacity = '0.5';
+}

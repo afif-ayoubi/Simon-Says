@@ -23,11 +23,14 @@ function generatePattern(level) {
     return pattern;
 }
 function makeClickable() {
-    tiles.forEach(tile => tile.classList.remove('unclickable'));
     board.classList.remove('unclickable');
 }
 
 function makeUnclickable() {
-    tiles.forEach(tile => tile.classList.add('unclickable'));
     board.classList.add('unclickable');
+}
+function activateTile(color){
+    const tile=document.querySelector(`[data-color="${color}"]`);
+    tile.style.opacity=1;
+    tile.classList.remove('inactive');
 }

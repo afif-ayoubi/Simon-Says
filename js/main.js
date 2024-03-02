@@ -38,3 +38,8 @@ function deactivateTile(color) {
     const tile = document.querySelector(`[data-tile="${color}"]`);
     tile.style.opacity = '0.5';
 }
+function playSound(color) {
+    const sound = sounds[color];
+    sound.currentTime = 0;
+    sound.play();
+}

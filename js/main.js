@@ -1,6 +1,10 @@
 const colors = ['green', 'red', 'blue', 'yellow'];
 const playButton = document.getElementById('play');
 const levelDisplay = document.getElementById('level');
+const highScoreDisplay = document.getElementById('high-score'); 
+
+let highScore = localStorage.getItem('highScore') || 0; 
+highScoreDisplay.textContent = highScore; 
 
 const sounds = {
     green: new Audio('sounds/green.mp3'),
@@ -102,8 +106,19 @@ function handleTileClick(color) {
             let level = parseInt(levelDisplay.textContent);
             level++;
             levelDisplay.textContent = level;
-            currentPattern.push(colors[Math.floor(Math.random() * colors.length)]);
-            playPattern(currentPattern);
+            if (level > highScore) {
+                highScore = level;
+                highScoreDisplay.textContent = highScore;
+                localStorage.setItem('highScore', highScore);
+            }
+            if (level === 12) { 
+                playGameWinSound(); 
+                alert("Congratulations! You've won the game!"); 
+                resetGame();
+            } else {
+                currentPattern.push(colors[Math.floor(Math.random() * colors.length)]);
+                playPattern(currentPattern);
+            }
         }
     } else {
         playGameOverSound();
@@ -111,6 +126,7 @@ function handleTileClick(color) {
         resetGame();
     }
 }
+
 
 tiles.forEach(tile => {
     tile.addEventListener('click', () => {

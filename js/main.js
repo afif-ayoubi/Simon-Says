@@ -8,7 +8,9 @@ const sounds = {
     gameWin: new Audio('sounds/game-win.wav'),
     wrong: new Audio('sounds/wrong.mp3')
 };
-
+const tiles = document.querySelectorAll('.tile');
+const board = document.querySelector('.board');
+ 
 let currentPattern = []; 
 let counter = 0; 
 
@@ -19,4 +21,13 @@ function generatePattern(level) {
         pattern.push(colors[randomIndex]);
     }
     return pattern;
+}
+function makeClickable() {
+    tiles.forEach(tile => tile.classList.remove('unclickable'));
+    board.classList.remove('unclickable');
+}
+
+function makeUnclickable() {
+    tiles.forEach(tile => tile.classList.add('unclickable'));
+    board.classList.add('unclickable');
 }
